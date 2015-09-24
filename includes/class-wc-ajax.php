@@ -694,8 +694,9 @@ class WC_AJAX {
 
 				} elseif ( isset( $attribute_values[ $i ] ) ) {
 
-					// Text based, separate by pipe
-					$values = implode( ' ' . WC_DELIMITER . ' ', array_map( 'wc_clean', explode( WC_DELIMITER, wp_unslash( $attribute_values[ $i ] ) ) ) );
+					// Text based, possibly separated by pipes (WC_DELIMITER). Preserve line breaks in non-variation attributes.
+					$values = $is_variation ? wc_clean( $attribute_values[ $i ] ) : implode( "\n", array_map( 'wc_clean', explode( "\n", $attribute_values[ $i ] ) ) );
+					$values = implode( ' ' . WC_DELIMITER . ' ', wc_get_text_attributes( $values ) );
 
 					// Custom attribute - Add attribute to array and set the values
 					$attributes[ sanitize_title( $attribute_names[ $i ] ) ] = array(
@@ -2368,7 +2369,7 @@ class WC_AJAX {
 			}
 
 			$key_id      = absint( $_POST['key_id'] );
-			$description = sanitize_text_field( $_POST['description'] );
+			$description = sanitize_text_field( wp_unslash( $_POST['description'] ) );
 			$permissions = ( in_array( $_POST['permissions'], array( 'read', 'write', 'read_write' ) ) ) ? sanitize_text_field( $_POST['permissions'] ) : 'read';
 			$user_id     = absint( $_POST['user'] );
 
@@ -2715,7 +2716,7 @@ class WC_AJAX {
 	 * @param  array $data
 	 */
 	private static function variation_bulk_action_variable_regular_price( $variations, $data ) {
-		if ( empty( $data['value'] ) ) {
+		if ( ! isset( $data['value'] ) ) {
 			return;
 		}
 
@@ -2741,7 +2742,7 @@ class WC_AJAX {
 	 * @param  array $data
 	 */
 	private static function variation_bulk_action_variable_sale_price( $variations, $data ) {
-		if ( empty( $data['value'] ) ) {
+		if ( ! isset( $data['value'] ) ) {
 			return;
 		}
 

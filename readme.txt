@@ -1,7 +1,6 @@
 === WooCommerce - excelling eCommerce ===
 Contributors: automattic, mikejolley, jameskoster, claudiosanches, royho, woothemes
 Tags: ecommerce, e-commerce, commerce, woothemes, wordpress ecommerce, affiliate, store, sales, sell, shop, shopping, cart, checkout, configurable, variable, widgets, reports, download, downloadable, digital, inventory, stock, reports, shipping, tax
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@woothemes.com&item_name=Donation+for+WooCommerce
 Requires at least: 4.0
 Tested up to: 4.3
 Stable tag: 2.4.6
@@ -159,9 +158,35 @@ Yes you can! Join in on our [GitHub repository](http://github.com/woothemes/wooc
 
 == Changelog ==
 
+= 2.5.0 - TBD =
+* Dev - API - Added /products/shipping_classes endpoint.
+* Dev - API - Added support to POST, PUT, and DELETE categories and tags.
+* Dev - API - Added support to filter products by tag, category, shipping class, and attribute.
+
+* Fix - Handle Switzerland in get_european_union_countries.
+* Fix - For geolocation with static cache support, ensure hash is appended during form submission.
+* Fix - To prevent discounts being applied in 'random' order (based on order added to cart), sort cart items based on subtotal during calculate_totals.
 * Fix - Removed extra ob_start() in class-wc-shortcodes.php.
 * Fix - Show counts in category dropdown.
+* Fix - Escape add to cart messages to stop translations from breaking cart events.
+* Fix - Display of product/order tables in the dashboard when viewed on handheld devices.
+* Fix - API order item 'key' value.
+* Fix - Check specifically for Post IDs in WC Query verbose rules fix.
+* Fix - Only run maybe_set_cart_cookies if cart was loaded to prevent notices.
+* Fix - Variation loading/refresh after attribute saving.
+* Fix - Add monthly cron schedule.
+* Tweak - Add filters to control "shipped via" text.
+* Tweak - Allow line breaks in non-variation attributes.
 * Tweak - Renamed wc_var_prices transient to allow them to flush on product save.
+* Tweak - woocommerce_save_account_details_required_fields hook.
+* Tweak - Only 'count' published variations.
+* Tweak - Display of order total in admin with refunds.
+* Tweak - Use Geolocation class for customer IP detection.
+* Tweak - Use the needs_payment function (DRY).
+* Tweak - Tweak wc_create_page to work with trashed pages.
+* Tweak - Redirect 'not right now' to referer in onboarding wizard.
+* Template - Removed 'Payment' heading in `templates/checkout/form-pay.php`.
+* Template - Removed unnecessary clearing div in `templates/checkout/payment.php`.
 
 = 2.4.6 - 24/08/2015 =
 * Fix - menu_order notices on IIS.
